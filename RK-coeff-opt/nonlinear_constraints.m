@@ -121,9 +121,13 @@ if ~isempty(constrain_emb_stability)
     con = [con, res .* conj(res) - 1];
 end
 
-% Energy Preserving conditions
-% Choose pseudo-energy-preserving q (up to 6)
-q=0;
+q=1;
+% Throw error message in case q>7
+msg = 'The energy-preserving conditions for orders q>7 have not been implemented.';
+% PEP conditions
+if q >= 8
+    error(msg);
+end
 if q>=1
     coneq(end+1) = sum(b)-1;
 end
