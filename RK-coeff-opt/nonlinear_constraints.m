@@ -122,12 +122,9 @@ if ~isempty(constrain_emb_stability)
 end
 
 q=1;
-% Throw error message in case q>7
-msg = 'The energy-preserving conditions for orders q>7 have not been implemented.';
+
 % PEP conditions
-if q >= 8
-    error(msg);
-end
+
 if q>=1
     coneq(end+1) = sum(b)-1;
 end
@@ -182,4 +179,9 @@ if q >= 7
     coneq(end+1) = ((b.*c)'*A^2*c)/6 - (b'*diag(c).^2*A^2*c)/4 + (b'*A*diag(c)*A*c)/6 - (b'*diag(c)*A*diag(c)*A*c)/2 + (b'*((A*(c.*(A*c))).*c.^2))/2 + (b'*A^2*c.^2)/12 - (b'*A*diag(c)*A*c.^2)/4 - (b'*A^2*c.^3)/12 + (b'*((A*(c.*(A*c.^3)))))/6 - (b'*(A*c).^2)/12 - ((b'.*c')*A*c)/12 + ((b.*c.^2)'*A*c)/8 + (b'*((A*c.^2).*(A*c)))/4 - (b'*A*c.^2)/12 + ((b.*c)'*A*c.^2)/4 - (b'*diag(c).^2*A*c.^2)/4 - (b'*((A*c.^3).*(A*c)))/6 + (b'*A*c.^3)/24;
     coneq(end+1) = ((b.*c)'*A^2*c)/12 + (b'*A*diag(c)*A*c)/3 - (b'*diag(c)*A*diag(c)*A*c)/2 - (b'*A*diag(c).^2*A*c)/2 + (b'*((A*(c.^2.*(A*c))).*c))/2 + (b'*A^2*c.^2)/24 - (b'*A*diag(c)*A*c.^2)/4 + (b'*((A*(c.^2.*(A*c.^2)))))/4 - (b'*(A*c).^2)/6 + (b'*diag(c)*(A*c).^2)/2 - (b'*A*c)/24 - ((b'.*c')*A*c)/12 - ((b.*c.^2)'*A*c)/8 + (b'*((A*c.^2).*(A*c)))/4 - (b'*((A*c.^2).*(A*c).*c))/2 - (b'*A*c.^2)/24 + ((b.*c)'*A*c.^2)/4 + (b'*diag(c).^2*A*c.^2)/8 + (b'*A*c.^3)/8 - (b'*diag(c)*A*c.^3)/4 + 1/144;
     coneq(end+1) = (c'.^4*b)/288 - (c'.^5*b)/240 + b'*(c.^6)/720 - 1/5040;
+end
+% Throw error message in case q>7
+msg = 'The energy-preserving conditions for orders q>7 have not been implemented.';
+if q >= 8
+    error(msg);
 end
